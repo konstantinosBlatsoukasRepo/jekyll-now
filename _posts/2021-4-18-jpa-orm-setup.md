@@ -14,7 +14,7 @@ What you will need:
 
 ## Set up
 
-1. Start a mysql server with a sample database
+### Start a mysql server with a sample database
 
   I used the this [image](https://hub.docker.com/r/genschsa/mysql-employees) from docker hub.
   By running the following command, you will get a mysql database and a sample employees
@@ -35,12 +35,12 @@ What you will need:
   ab35057ee13c   genschsa/mysql-employees   "docker-entrypoint.s…"   7 days ago   Up 2 hours   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql-employees
   ```
   
-2. Start a new java project
+### Start a new java project
 
 - navigate to [spring initialzr](https://start.spring.io/)
 - add as dependencies the *Spring JPA* and *MySQL driver*
 
-3. at application.properties file add the following lines
+### at application.properties file add the following lines
 
 ```sh
 spring.jpa.hibernate.ddl-auto=update
@@ -52,6 +52,8 @@ spring.datasource.password=college
 spring.jpa.show-sql=true
 ```
 
-4. Finally, try top start the application (make sure that the container is up), 
+### Test that the app is connected
+
+   Finally, try top start the application (make sure that the container is up), 
    if you see no error that means that you have successfully connected the app 
    to the MySQL database 
