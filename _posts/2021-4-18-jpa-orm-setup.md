@@ -3,7 +3,7 @@ layout: post
 title: JPA/Hibernate setup with sample database
 ---
 
-How to run locally a mysql databse and connect the database to a spring application.
+How to run locally a mysql database and connect the database to a spring application.
 
 What you will need:
 
