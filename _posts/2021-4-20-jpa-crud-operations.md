@@ -59,7 +59,7 @@ public class Employee {
 
 #### Get the entity manager
 
-Now that you have mapped the db table time for performing some operations!
+Now that the db table is mapped, time for performing some operations!
 In order to do anything with an entity you have to fetch an *EntityManager*,
 an *EntityManager* can manage entities (You didn't expect that :)).
 
