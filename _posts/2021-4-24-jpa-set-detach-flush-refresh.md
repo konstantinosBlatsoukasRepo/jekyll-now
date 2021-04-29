@@ -43,26 +43,26 @@ queries performed:
         employee0_.first_name as first_na3_2_0_,
         employee0_.gender as gender4_2_0_,
         employee0_.hire_date as hire_dat5_2_0_,
-        employee0_.last_name as last_nam6_2_0_ 
+        employee0_.last_name as last_nam6_2_0_
     from
-        employees employee0_ 
+        employees employee0_
     where
         employee0_.emp_no=?
 
     update
-        employees 
+        employees
     set
         birth_date=?,
         first_name=?,
         gender=?,
         hire_date=?,
-        last_name=? 
+        last_name=?
     where
         emp_no=?
 ```
 
 One select is performed for retrieving the entity and one update due to set.
-E
+
 ## detach method
 
 By executing the detach method in an entity, this entity is not longer in the persistent context
@@ -89,9 +89,9 @@ queries performed:
         employee0_.first_name as first_na3_2_0_,
         employee0_.gender as gender4_2_0_,
         employee0_.hire_date as hire_dat5_2_0_,
-        employee0_.last_name as last_nam6_2_0_ 
+        employee0_.last_name as last_nam6_2_0_
     from
-        employees employee0_ 
+        employees employee0_
     where
         employee0_.emp_no=?
 ```
@@ -121,39 +121,39 @@ public void playWithEntityManagerFlushAndRefresh(int employeeId) {
 queries performed/output:
 
 ```sql
-Hibernate: 
+Hibernate:
     select
         employee0_.emp_no as emp_no1_2_0_,
         employee0_.birth_date as birth_da2_2_0_,
         employee0_.first_name as first_na3_2_0_,
         employee0_.gender as gender4_2_0_,
         employee0_.hire_date as hire_dat5_2_0_,
-        employee0_.last_name as last_nam6_2_0_ 
+        employee0_.last_name as last_nam6_2_0_
     from
-        employees employee0_ 
+        employees employee0_
     where
         employee0_.emp_no=?
- 
+
     update
-        employees 
+        employees
     set
         birth_date=?,
         first_name=?,
         gender=?,
         hire_date=?,
-        last_name=? 
+        last_name=?
     where
         emp_no=?
- 
+
     select
         employee0_.emp_no as emp_no1_2_0_,
         employee0_.birth_date as birth_da2_2_0_,
         employee0_.first_name as first_na3_2_0_,
         employee0_.gender as gender4_2_0_,
         employee0_.hire_date as hire_dat5_2_0_,
-        employee0_.last_name as last_nam6_2_0_ 
+        employee0_.last_name as last_nam6_2_0_
     from
-        employees employee0_ 
+        employees employee0_
     where
         employee0_.emp_no=?
 
