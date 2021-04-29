@@ -3,7 +3,7 @@ layout: post
 title: git merge, by example
 ---
 
-Let's what git merge does by example.
+Let's see what git merge does by example.
 
 ## repository before merging
 
