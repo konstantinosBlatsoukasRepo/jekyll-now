@@ -206,3 +206,173 @@ public class Employee {
 - FetchType.LAZY
 - FetchType.EAGER
 
+### Seeding a DB
+
+- using CommandLineRunner
+
+```java
+
+@Bean
+CommandLineRunner runner() {
+   return arg -> {
+      // entity POJOS
+      // use repositories to store the data
+   };
+}
+
+```
+
+- using SQL files
+  1. data.sql under resources folder
+
+### Create DDL statements with an SQL file
+
+  1. data.sql under resources
+  2. schema.sql + spring.jpa.hibernate.ddl-auto=none
+
+### Ids
+
+```java
+@GeneratedValue(strategy=GenerationType.AUTO) // uses sequence defined in Spring
+@GeneratedValue(strategy=GenerationType.IDENTITY) // uses DB id
+@GeneratedValue(strategy=GenerationType.SEQUENCE) // faster
+```
+
+### Dependancy Injenction
+
+example:
+
+```java
+@Autowired
+ProjectRepository  projectRepository;
+
+@Bean
+public Car newCar() {
+   return new Car();
+}
+
+@Configuration
+public class XXXConfig {
+   // beans
+}
+```
+
+### Component scannig
+
+```java
+@Service  // logic
+@Repository // data
+@Component // catch all scenario
+
+@SpringBootApplication(scanBasePackeges={"package", "otherPackage"})
+```
+
+### Constructor injection, field injenction and setter injection
+
+- Field injenction: @Autowired
+- Constructor injection:
+
+  ```java
+  public class MyController {
+     EmployeeRepository myRepo;
+
+     public MyController(EmployeeRepository myRepo) {
+        this.myRepo = myRepo;
+     }
+
+  }
+  ```
+
+- Setter injection:
+
+  ```java
+  public class MyController {
+     EmployeeRepository myRepo;
+
+     @Autowired
+     public void setMyRepo(EmployeeRepository myRepo) {
+        this.myRepo = myRepo;
+     }
+  }
+  ```
+
+### read application properties (from application.properties)
+
+```java
+@Value("${key.in.app.properties.file}")
+private String myProperty;
+
+```
+
+### read application properties from environment variables
+
+in application.properties file
+
+```java
+version=${envVersionNum}
+```
+
+### db
+
+```java
+spring.datasource.initialization-mode=never // data.sql, schema.sql,options:  always, embedded
+
+schema.sql + spring.jpa.hibernate.ddl-auto=none // definitions derived from .sql file
+```
+
+### Test
+
+```java
+
+@ContextConfiguration(classes=MyMain.class) // specify the main class of the app
+@RunWith(SpringRunner.class)
+@DataJpaTest
+@SqlGroup({@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts= {"classpath:schema.sql", "classpath:data.sql"})}
+)
+
+
+@SpringBootTest // use same pacakge as the main project
+@RunWith(SpringRunner.class)
+
+@LocalServerPort
+private int port;
+
+@Autowired
+private TestRestTemplate restTemplate;
+
+
+```
+
+### Profiles
+
+- prod profile, application-prod.properties
+- dev profile, application-dev.properties
+- qa profile
+
+In application.properties:
+
+spring.profiles.active=dev
+
+### Logging
+
+```java
+logging.level.com.jrp.pma = DEBUG
+
+@Aspect
+@Component
+public class AppLoggerAspect {
+
+   private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+   // where ? pointcut || location is the same thing
+   @Pointcut("within(com.jrp.pma.controllers.*)")
+   public void definePackgePointcuts() {
+
+   }
+
+   @After("definePackgePointcuts()") || @Before("definePackgePointcuts()")
+   public void log() {
+      log.debug(" ---- ");
+   }
+}
+```
